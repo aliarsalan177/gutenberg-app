@@ -3,7 +3,7 @@ export type GraphLink = {
   source: string | GraphNode;
   target: string | GraphNode;
 };
-type SampleQuote = { character: string; line: string };
+type SampleQuote = { character: string; line: string; sentiment: string, context: string; };
 
 type GraphData = {
     nodes: GraphNode[];

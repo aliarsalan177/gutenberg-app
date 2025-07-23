@@ -36,17 +36,29 @@ export const analyzeBook = async (
             messages: [
                 {
                     role: "user",
-                    content: `Analyze the following book and identify the key characters. Then, return a JSON object with "nodes", "sampleQuotes" and "links" for character interactions in the following format:
+                    content: `Analyze the following book and identify the key characters. Then, return a JSON object with "nodes", "sampleQuotes", and "links" for character interactions in the following format:
 {
   "nodes": [{ "id": "Character Name" }],
-  "links": [{ "source": "Character A", "target": "Character B" }],
+  "links": [
+    {
+      "source": "Character A",
+      "target": "Character B",
+      "interactionType": "conflict | alliance | dialogue | mention"
+    }
+  ],
   "sampleQuotes": [
     {
       "character": "Character Name",
-      "line": "Quote text"
+      "line": "Quote text",
+      "sentiment": "Positive | Negative | Neutral",
+      "context": "Brief description of what the quote is about or what is happening"
     }
   ]
 }
+
+- "interactionType" should classify the relationship or exchange between characters (e.g. whether it’s a conflict, alliance, dialogue, or one simply mentions the other).
+- "sentiment" reflects the emotional tone of the quote.
+- "context" provides a short summary or explanation of the situation.
 
 Book Content:
 ${prompt.slice(0, 12000)}
