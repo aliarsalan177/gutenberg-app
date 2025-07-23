@@ -71,9 +71,9 @@ export default function ChatBox() {
                             <div>
                                 <strong className="font-medium">Title:</strong> {data.title}
                             </div>
-                            <div>
+                            {data.author && <div>
                                 <strong className="font-medium">Author:</strong> {data.author}
-                            </div>
+                            </div>}
                         </div>
                     )
                 )}

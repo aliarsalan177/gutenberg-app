@@ -115,7 +115,7 @@ export default function CharacterGraph({
             .attr("r", (d) => radiusScale(degreeMap.get(d.id) || 0))
             .attr("fill", "#1e40af") // Tailwind blue-900
             .style("cursor", "grab")
-            .on("mouseenter", (event, d) => {
+            .on("mouseenter", (_event, d) => {
                 tooltip.style("opacity", "1").html(`<strong>${d.id}</strong>`);
             })
             .on("mousemove", (event) => {
