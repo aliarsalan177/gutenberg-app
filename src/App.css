@@ -1,0 +1,80 @@
+/* Container for app root */
+#root {
+  margin: 0 auto;
+  width: 100%;
+  padding: 2rem;
+  text-align: center;
+  /* Add flex layout for vertical alignment */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--bg-color, #fff);
+  color: var(--text-color, #000);
+}
+
+/* Logo styling */
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+  cursor: pointer;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+/* Spin animation for logo */
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animate second logo only if user prefers motion */
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+/* Card styling */
+.card {
+  padding: 2em;
+  background: var(--card-bg, #f9f9f9);
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  margin: 1rem 0;
+  width: 100%;
+  max-width: 700px;
+  color: var(--card-text, #333);
+}
+
+/* Subtle styling for documentation links */
+.read-the-docs {
+  color: #888;
+}
+
+/* Ensure SVG container for D3 fills parent and is visible */
+.d3-container {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  position: relative;
+}
+
+.d3-container text {
+  fill: #333;
+  font-family: Arial, sans-serif;
+  pointer-events: none;
+  user-select: none;
+}
