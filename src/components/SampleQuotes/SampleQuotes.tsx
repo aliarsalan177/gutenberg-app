@@ -3,7 +3,7 @@ import type { AnalyzeBookResult } from "@/types";
 export default function SampleQuotes({ quotes }: { quotes: AnalyzeBookResult['sampleQuotes'] }) {
 
     return (
-        <div className="max-w-4xl mx-auto px-6 pb-16">
+        <div className="max-w-4xl">
             <h2 className="text-xl font-semibold mb-4">🎭 Sample Dialogues, Sentiment & Context</h2>
             <ul className="list-none space-y-4 text-sm text-gray-700">
                 {quotes.map((q, i) => (

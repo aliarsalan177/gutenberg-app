@@ -3,9 +3,15 @@ export type GraphLink = {
   source: string | GraphNode;
   target: string | GraphNode;
 };
+
 type SampleQuote = { character: string; line: string; sentiment: string, context: string; };
 
-type GraphData = {
+export type CharacterNetworkProps = {
+    nodes: GraphNode[];
+    links: GraphLink[];
+};
+
+export type GraphData = {
     nodes: GraphNode[];
     links: GraphLink[];
     sampleQuotes?: SampleQuote[];

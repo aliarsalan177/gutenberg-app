@@ -36,7 +36,8 @@ export const analyzeBook = async (
             messages: [
                 {
                     role: "user",
-                    content: `Analyze the following book and identify the key characters. Then, return a JSON object with "nodes", "sampleQuotes", and "links" for character interactions in the following format:
+                    content: `Analyze the following book and identify the key characters. Then, return a JSON object with "nodes", "sampleQuotes", "links", and a "characterNetwork" summary for interactions in the following format:
+
 {
   "nodes": [{ "id": "Character Name" }],
   "links": [
@@ -53,17 +54,22 @@ export const analyzeBook = async (
       "sentiment": "Positive | Negative | Neutral",
       "context": "Brief description of what the quote is about or what is happening"
     }
+  ],
+  "characterNetwork": [
+    "Character A (Total Interactions): Character B (N), Character C (N)..."
   ]
 }
 
 - "interactionType" should classify the relationship or exchange between characters (e.g. whether it’s a conflict, alliance, dialogue, or one simply mentions the other).
 - "sentiment" reflects the emotional tone of the quote.
 - "context" provides a short summary or explanation of the situation.
+- "characterNetwork" should be a list of markdown-formatted lines like: 
+  - **Romeo (45)**: Juliet (23), Mercutio (12), Friar (10)
 
 Book Content:
 ${prompt.slice(0, 12000)}
-`,
-                },
+`
+                }
             ],
             temperature: 0.2,
         }),

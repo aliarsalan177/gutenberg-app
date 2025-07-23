@@ -2,6 +2,7 @@ import React from "react";
 import { useAnalyzeBookMutation } from "./Chatbox.config";
 import CharacterGraph from "@/components/CharacterGraph";
 import SampleQuotes from "@/components/SampleQuotes";
+import CharacterNetwork from "../CharacterNetwork";
 
 const Skeleton = ({ className = "" }) => (
     <div className={`animate-pulse bg-gray-300 rounded h-4 w-full ${className}`}
@@ -77,9 +78,17 @@ export default function ChatBox() {
                     )
                 )}
             </div>
-            {!isPending && data?.sampleQuotes && (
-                <SampleQuotes quotes={data.sampleQuotes} />
-            )}
+            {isPending ?
+                <div className="space-y-2 py-5 animate-pulse">
+                    <Skeleton className="h-8 w-full" />
+                    <Skeleton className="h-8 w-full" />
+                </div>
+                : data?.sampleQuotes && (
+                    <div className="flex gap-3 mx-auto justify-center py-5">
+                        <CharacterNetwork nodes={data.graphData.nodes} links={data.graphData.links} />
+                        <SampleQuotes quotes={data.sampleQuotes} />
+                    </div>
+                )}
             <div className="w-full mx-auto">
                 {isPending ? (
                     <Skeleton className="h-56 w-32" />
