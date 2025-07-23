@@ -70,10 +70,10 @@ export default function CharacterGraph({
                     .strength(1)
             )
             .force("charge", d3Force.forceManyBody().strength(-500))
-            // .force(
-            //     "center",
-            //     d3Force.forceCenter(dimensions.width / 2, dimensions.height / 2)
-            // )
+            .force(
+                "right",
+                d3Force.forceCenter(dimensions.width / 2, dimensions.height / 2)
+            )
             .force(
                 "collide",
                 d3Force
@@ -113,7 +113,7 @@ export default function CharacterGraph({
             .enter()
             .append("circle")
             .attr("r", (d) => radiusScale(degreeMap.get(d.id) || 0))
-            .attr("fill", "#1e40af") // Tailwind blue-900
+            .attr("fill", "#1e40af")
             .style("cursor", "grab")
             .on("mouseenter", (_event, d) => {
                 tooltip.style("opacity", "1").html(`<strong>${d.id}</strong>`);

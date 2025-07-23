@@ -22,7 +22,6 @@ export default function ChatBox() {
         const bookId = formData.get("bookId")?.toString().trim();
         if (bookId) submitBook(bookId);
     };
-    console.log(data);
 
     return (
         <>

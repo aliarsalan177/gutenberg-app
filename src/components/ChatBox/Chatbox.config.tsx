@@ -10,8 +10,9 @@ const GUTENBERG_META_URL = (bookId: string) =>
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
 
-
-export const analyzeBook = async (bookId: string): Promise<AnalyzeBookResult> => {
+export const analyzeBook = async (
+    bookId: string
+): Promise<AnalyzeBookResult> => {
     const [textRes, metaRes] = await Promise.all([
         fetch(GUTENBERG_TEXT_URL(bookId)),
         fetch(GUTENBERG_META_URL(bookId)),
@@ -21,7 +22,8 @@ export const analyzeBook = async (bookId: string): Promise<AnalyzeBookResult> =>
     const metaHtml = await metaRes.text();
 
     const title = metaHtml.match(/<title>(.*?)<\/title>/)?.[1] || "";
-    const author = metaHtml.match(/<meta name="author" content="(.*?)"/)?.[1] || "";
+    const author =
+        metaHtml.match(/<meta name="author" content="(.*?)"/)?.[1] || "";
 
     const llmRes = await fetch(GROQ_API_URL, {
         method: "POST",
@@ -35,7 +37,6 @@ export const analyzeBook = async (bookId: string): Promise<AnalyzeBookResult> =>
                 {
                     role: "user",
                     content: `Analyze the following book and identify the key characters. Then, return a JSON object with "nodes", "sampleQuotes" and "links" for character interactions in the following format:
-
 {
   "nodes": [{ "id": "Character Name" }],
   "links": [{ "source": "Character A", "target": "Character B" }],
@@ -60,8 +61,7 @@ ${prompt.slice(0, 12000)}
     const content = choices?.[0]?.message?.content || "";
 
     const match = content.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
-    if (!match) throw new Error("Failed to extract JSON from LLM response");
-
+    if (!match) throw new Error("Somthing Went Wrong");
 
     const graphData = JSON.parse(match[1]);
 
