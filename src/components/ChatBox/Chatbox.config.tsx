@@ -9,14 +9,18 @@ const GUTENBERG_META_URL = (bookId: string) =>
 
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
+const CROSS_PROXY = 'https://corsproxy.io/?';
+
 
 export const analyzeBook = async (
     bookId: string
 ): Promise<AnalyzeBookResult> => {
+
     const [textRes, metaRes] = await Promise.all([
-        fetch(GUTENBERG_TEXT_URL(bookId)),
-        fetch(GUTENBERG_META_URL(bookId)),
+        fetch(CROSS_PROXY + encodeURIComponent(GUTENBERG_TEXT_URL(bookId))),
+        fetch(CROSS_PROXY + encodeURIComponent(GUTENBERG_META_URL(bookId))),
     ]);
+
 
     const prompt = await textRes.text();
     const metaHtml = await metaRes.text();
